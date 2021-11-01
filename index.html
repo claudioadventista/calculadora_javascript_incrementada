@@ -1,0 +1,430 @@
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+	    <meta charset="UTF-8">
+	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	    <title>Calculadora</title>
+	    <style>
+	    
+	        *{
+	            margin: 0;
+	            padding: 0;
+	        }
+	        
+	        .fundo{
+	            /*background-image: linear-gradient(45deg,black, crimson);*/
+	            background-color: #ddd;
+	            height: 100vh;
+	            color: #fff;
+	            font-family: Arial, Helvetica, sans-serif;
+	            text-align: center;
+	        }
+	        
+	        @font-face{
+				font-family:digital;  /* chama a classe de fonte digital para o projeto */
+				src: url(fonte_digital/digital-7.TTF); 
+				}
+				
+			h1{
+				text-transform:uppercase;
+				background: rgba(10,100,100,0.5);
+			}
+			
+	        .calculadora{
+	            position: absolute;
+	            background-color: rgba(0, 0, 0, 0.7);
+	            top: 50%;
+	            left: 50%;
+	            transform: translate(-50%,-50%);
+	            border-radius: 5px;
+	            padding: 15px;
+	            width:715px;
+	        }
+	        
+	        .botao{
+	            width: 50px;
+	            height: 50px;
+	            font-size: 25px;
+	            cursor: pointer;
+	            margin: 3px;
+	            background-color: rgb(31,31,31);
+	            border: none;
+	            color: #fff;
+	        }
+	        
+	        .botao:hover{
+	            background-color: black;
+	        }
+	        
+	        #resultado{
+	           background-color: #95a26b;           
+	            width: 98%;
+	            height: 67px;
+	            margin: 5px 0 5px 0;
+	            font-family:digital;  /* define a fam�lia de fonte digital na div */
+				src: url(fonte_digital/digital-7.TTF); 
+	            color: #53563c;
+	            text-align: right;
+	            padding: 5px 5px 0 5px;
+	            border-radius: 3px;
+	            cursor:pointer;
+	        }
+	        
+	         #resultado2{
+	           background-color: #95a26b;                    
+	            width: 400px;
+	            height: 46px;
+	            margin: 5px 0 5px 0;
+	            font-family:digital;  /* define a fam�lia de fonte digital na div */
+				src: url(fonte_digital/digital-7.TTF); 
+	            color: #53563c;
+	            font-size: 40px;
+	            text-align: right;
+	            padding: 5px 5px 0 5px;
+	            float:left;
+	             border-radius: 3px;
+	        }
+	        
+	        .botao1{
+	        	 background: rgb(31,31,31);
+	        }
+	    
+	    </style>
+	</head>
+	<body>
+		
+	    <div class="fundo">
+	        
+	        <div class="calculadora">
+	            
+	            <h1>Calculadora &nbsp&nbsp javascript</h1> 
+	            <p id="resultado" onclick="retorna()"></p>
+	            <p id="resultado2"></p>
+	            
+	            <table style="float:right">
+	                <tr>
+	                    <td>
+	                    	<button class="botao" onclick="clean()">  CE        </button>
+	                    </td>
+	                    <td>
+	                    	<button class="botao" onclick="back()"><span style="position:relative;font-size:40px;bottom:4px;">  &#9664 </span> </button>
+	                    </td>
+	                    <td>
+	                    	<!--<button  id="linha" class="botao" onclick="linha()" onmouseover="this.style.backgroundColor ='black'"; onmouseout="this.style.backgroundColor ='rgb(31,31,31)'"; >  Seq </button>-->
+	                    	<button  id="linha" class="botao" onclick="linha()" >  Seq </button>
+	                    </td>
+	                    <td>
+	                    	<button id="direto" class="botao" style="background: green;" onclick="direto()"> Dir </button>
+	                    </td>
+	                    <td>             
+	                    	<button id="porcentagem" class="botao" onclick="porcentagem()">                    &#37      </button>
+	                    </td>                   
+	                </tr>
+	                <tr>
+	                    <td>
+	                    	<button class="botao" onclick="insert('7')"> 7             </button>
+	                    </td>
+	                    <td>
+	                    	<button class="botao" onclick="insert('8')"> 8             </button>
+	                    </td>
+	                    <td>
+	                    	<button class="botao" onclick="insert('9')"> 9             </button>
+	                    </td>
+	                    <td>
+	                    	<button class="botao simbolo" onclick="insertSimbol('/')"> &#247         </button>
+	                    </td>
+	                    <td>
+	                    	<button class="botao" onclick="quadrado()">  N<sup>2</sup> </button>
+	                    </td>   
+	                </tr>
+	                <tr>
+	                    <td>
+	                    	<button class="botao" onclick="insert('4')"> 4      </button>
+	                    </td>
+	                    <td>
+	                    	<button class="botao" onclick="insert('5')"> 5      </button>
+	                    </td>
+	                    <td>
+	                    	<button class="botao" onclick="insert('6')"> 6      </button>
+	                    </td>
+	                    <td>
+	                    	<button class="botao simbolo" onclick="insertSimbol('*')"> &times </button>
+	                    </td>
+	                    <td>
+	                    	<button class="botao" onclick="raiz()">      &#8730 </button>
+	                    </td>
+	                </tr>
+	                <tr>
+	                    <td>								
+	                    	<button class="botao" onclick="insert('1')"> 					1 </button>
+	                    </td>
+	                    <td>								
+	                    	<button class="botao" onclick="insert('2')"> 					2 </button>
+	                    </td>
+	                    <td>								
+	                    	<button class="botao" onclick="insert('3')"> 					3 </button>
+	                    </td>
+	                    <td>								
+	                    	<button class="botao simbolo" onclick="insertSimbol('-')"> 					- </button>
+	                    </td>
+	                    <td rowspan="2" style="height:1px;">
+	                    	<button style="height:95%" class="botao" onclick="calcular()">  = </button>
+	                    </td>
+	                </tr>
+	                <tr>
+	                    <td colspan="2">
+	                    	<button class="botao" style="width: 106px;" onclick="insert('0')"> 0 </button>
+	                    </td>
+	                    <td>   			
+	                    	<button id="botaoPonto" class="botao" onclick="insert('.')">					   . </button>
+	                    </td>
+	                   <td>				
+	                   		<button class="botao simbolo" onclick="insertSimbol('+')"> 					   + </button>
+	                   </td>
+	                </tr>
+	            </table> 
+	            
+	        </div>
+	        
+	    </div>
+	    
+	    <script>
+	    
+		    // variaveis globais
+		    controle = "false";
+		    forma    = "direto";// detrmina se vai mostrar uma sequencia de caracteres, ou vai somando
+		    primeiro = "false";
+		    ponto    = 0;
+		    sinal    = 0;
+		    primeiroNumero = 0;
+		    resultado = 0;
+		    retornar = 0;
+		    
+			function insert(num) {    
+		          let numero = document.getElementById('resultado').innerHTML;  
+				  if (numero.length <= 49){       
+				     if (numero.length < 23){
+					    document.getElementById('resultado').style.fontSize = "50px";
+					 }else if (numero.length > 23 && numero.length < 28){
+					    document.getElementById('resultado').style.fontSize = "40px";
+					 }else if (numero.length > 28 && numero.length < 36){
+					    document.getElementById('resultado').style.fontSize = "30px";
+					 }else if (numero.length > 36 && numero.length < 40){
+					    document.getElementById('resultado').style.fontSize = "20px";
+					 }  
+					    if(num =="."){
+					       //const existeDecimal = () => resultado.textContent.indexOf('.') != -1;
+					       // verifica se o ponto j� foi digitado e impede se for preciso
+					       if(ponto == 0){
+					       		document.getElementById("botaoPonto").style.backgroundColor = "#df013a";
+					       	 	if(numero.length == 0){
+						       		 document.getElementById('resultado').innerHTML = "0.";
+						       		 ponto ++;
+						       		 exit();
+					       		}else{
+						       		 document.getElementById('resultado').innerHTML = numero + num;
+					       	}
+						      ponto ++;
+						   }else{
+							  exit();
+						   }
+						}			       			
+			         document.getElementById('resultado').innerHTML = numero + num;			            
+					 if (primeiro == "true"){
+					    let resta = document.getElementById('resultado').innerHTML;
+					    clean();
+						let ultima = resta.slice(-1);
+						document.getElementById('resultado').innerHTML = ultima;    	
+						primeiro = "false";		
+					 }  
+					 
+					 const button = document.querySelectorAll("button.simbolo");
+					  button.forEach(function (element){
+					  		element.style.backgroundColor = "rgb(31,31,31)";
+					  		element.style.cursor = "pointer";		
+					  });				    
+					 sinal = 0; 	    	
+				} 				
+		    }
+		    
+		    function clean() {
+		       document.getElementById('resultado').innerHTML = "";
+		       document.getElementById('resultado2').innerHTML = "";
+		       document.getElementById("botaoPonto").style.backgroundColor = "rgb(31,31,31)";
+		       ponto = 0;
+		       retornar = 0;
+		    }
+		    
+		    function back() {
+		       resultado = document.getElementById('resultado').innerHTML;
+		       
+		       if (resultado.length < 26){
+			      document.getElementById('resultado').style.fontSize = "50px";
+			   }else if (resultado.length > 26 && resultado.length < 31){
+			      document.getElementById('resultado').style.fontSize = "40px";
+			   }else if (resultado.length > 31 && resultado.length < 39){
+			      document.getElementById('resultado').style.fontSize = "30px";
+			   }else if (resultado.length > 39 && resultado.length < 43){	             	  
+			      document.getElementById('resultado').style.fontSize = "20px";
+			   } 
+			   // apaga o ultimo caracrere do display resultado
+			   let teste = document.getElementById('resultado').innerHTML = resultado.substring(0, resultado.length -1)     
+		       // pega o ultimo caractere do display resultado, dos caracteres que sobraram
+		       let apagou = teste.slice(-1);
+		        // se o resultado for um n�mero, fa�a o seguinte...
+		        if (!isNaN(apagou)){
+		      		if(teste.length > 0){
+		      			 // some os n�meros que sobraram, e coloque o resultado no display que atualiza o total 
+		      			teste2 =  document.getElementById('resultado2').innerHTML = eval(teste);
+			       	}else{ 	
+		       			document.getElementById('resultado2').innerHTML = '';
+		       		}
+		       } 
+		       
+		       if(resultado.indexOf('.') == -1){
+		       		document.getElementById("botaoPonto").style.backgroundColor = "rgb(31,31,31)";
+		       		ponto = 0;
+		       }
+		       // muda a cor dos sinais para habilitado, ao apagar um sinal
+		        if((resultado.indexOf('+') != -1) || (resultado.indexOf('-') != -1) || (resultado.indexOf('*') != -1) || (resultado.indexOf('/') != -1)){
+		       		 const button = document.querySelectorAll("button.simbolo");
+					  button.forEach(function (element){
+					  		element.style.backgroundColor = "rgb(31,31,31)";
+					  		element.style.cursor = "pointer";
+					  				
+					  });
+					    
+		       }
+		       
+					  	
+		       
+		       
+		       sinal = 0;
+		    }
+		    
+		    function calcular() {
+		       resultado = document.getElementById('resultado').innerHTML;
+		       if (resultado.length <= 50){
+			       if(resultado) {
+			       	  retornar = resultado;
+				      document.getElementById('resultado').style.fontSize = "50px";
+			          document.getElementById('resultado').innerHTML = eval(resultado);
+			          document.getElementById('resultado2').innerHTML = "";
+			          controle = "false";
+			          primeiro = "true";
+			       }
+			    }
+		    }
+		    
+		    function insertSimbol(num){
+		       resultado = document.getElementById('resultado').innerHTML;
+		       primeiroNumero = resultado; 
+		       if (resultado.length <= 49){         
+			       if(sinal == 0){
+				      if(resultado) {
+				         if (forma == "direto"){
+						    document.getElementById('resultado').style.fontSize = "50px";
+							if (controle == "false") {
+							   document.getElementById('resultado').innerHTML = resultado + num;  	
+							   controle = "true";
+							}else{
+							   document.getElementById('resultado').innerHTML = eval(resultado) + num;	 
+							}					 
+						 }else{			 	
+						    document.getElementById('resultado').innerHTML = resultado + num; 
+						 } 
+						 primeiro = "false";
+						 // permite digitar o ponto
+						 ponto = 0;
+						 if(forma == "linha") {
+				            document.getElementById('resultado2').innerHTML = eval(resultado);
+				         }else{
+				         	 document.getElementById('resultado2').innerHTML ='';
+				         }
+				      }
+				      
+				      // muda a cor dos sinais para desabilitado
+					  const button = document.querySelectorAll("button.simbolo");
+					  button.forEach(function (element){
+					  		element.style.backgroundColor = "#df013a";
+					  		element.style.cursor = "not-allowed";		
+					  });
+				      
+				      document.getElementById("botaoPonto").style.backgroundColor = "rgb(31,31,31)";
+
+				      sinal ++;
+			       }
+		    	}
+		    }
+		    
+		    function raiz() {
+		       let raiz = document.getElementById('resultado').innerHTML;
+		       document.getElementById('resultado').innerHTML = Math.sqrt(raiz); 
+		       primeiro = "true";           
+		    }
+		    
+		    function quadrado() {
+		       let raiz = document.getElementById('resultado').innerHTML;
+		       document.getElementById('resultado').innerHTML = Math.pow(raiz,2);
+		       primeiro = "true";
+		    }
+		    
+		    function retorna(){
+			      if(retornar != 0){
+			      	document.getElementById('resultado').style.fontSize = "30px";
+			      	document.getElementById('resultado').innerHTML = retornar;
+			      }    	
+		    }
+		    function porcentagem(){
+		    	resultado = document.getElementById('resultado').innerHTML;
+		    	if(resultado.length > 0) {
+		    	 let resultado = document.getElementById('resultado').innerHTML;
+		    	 let multiplica; 	   
+		    	 if(resultado.indexOf('+') != -1){
+			    	 resultado = resultado.replace('+','*');	
+			    	 multiplica = eval(resultado)/100;
+			    	 document.getElementById('resultado').innerHTML = parseFloat(primeiroNumero) + parseFloat(multiplica);	
+		    	 }else if(resultado.indexOf('/') != -1){
+		    		 resultado = resultado.replace('/','*');	
+			    	 multiplica = eval(resultado)/100;
+			    	 document.getElementById('resultado').innerHTML = parseFloat(primeiroNumero) / parseFloat(multiplica);
+		    	 }else if(resultado.indexOf('-') != -1){
+		    	 	 resultado = resultado.replace('-','*');	
+			    	 multiplica = eval(resultado)/100;
+			    	 document.getElementById('resultado').innerHTML = parseFloat(primeiroNumero) - parseFloat(multiplica);
+		    	}else{
+			    	 document.getElementById('resultado').innerHTML = eval(resultado)/100;
+		    	 };
+		    	document.getElementById('resultado2').innerHTML = ""; 
+		    	}
+		    }
+		    
+		    function linha(){
+		       let linha = document.getElementById('linha');
+		       let direto = document.getElementById('direto');
+		       linha.style.backgroundColor = "green";
+		       direto.style.backgroundColor = "rgb(31,31,31)"; 
+		       document.getElementById('porcentagem').disabled = true;
+		       document.getElementById('porcentagem').style.backgroundColor = "#df013a";
+		       document.getElementById('porcentagem').style.cursor = "not-allowed";
+		       forma = "linha";	 
+		    }
+		    
+		    function direto(){
+		       let linha = document.getElementById('linha');
+		       let direto = document.getElementById('direto');
+		       direto.style.backgroundColor = "green";
+		       document.getElementById('porcentagem').disabled = false;
+		       linha.style.backgroundColor = "rgb(31,31,31)";  
+		       document.getElementById('porcentagem').disabled = false;
+		       document.getElementById('porcentagem').style.backgroundColor = "rgb(31,31,31)";
+		       document.getElementById('porcentagem').style.cursor = "pointer";      	
+		       forma = "direto";	
+		    }
+	    
+	    </script>
+	
+	</body>
+
+</html>
